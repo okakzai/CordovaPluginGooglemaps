@@ -65,6 +65,9 @@ function initAds() {
   }
 }
 
+function onMapInit(map) {
+}
+
 function onDeviceReady() {
   document.removeEventListener('deviceready', onDeviceReady, false);
   initAds();
@@ -74,13 +77,11 @@ function onDeviceReady() {
   // request an interstitial
   admob.requestInterstitialAd();
   
-  var map;
-  var div = document.getElementById("map_canvas");
-  // Initialize the map view
-  map = plugin.google.maps.Map.getMap(div);
-  // Wait until the map is ready status.
-  map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
-
+  var mapDiv = document.getElementById("map_canvas");
+  // Initialize the map plugin
+  var map = plugin.google.maps.Map.getMap(mapDiv);
+  // You have to wait the MAP_READY event.
+  map.on(plugin.google.maps.event.MAP_READY, onMapInit);
 }
 
 document.addEventListener("deviceready", onDeviceReady, false);
