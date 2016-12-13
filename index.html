@@ -25,6 +25,39 @@
     function onBtnClicked() {
       map.showDialog();
     }
+      
+      initAds();
+
+  // display a banner at startup
+  admob.createBannerView();
+
+  // request an interstitial
+  admob.requestInterstitialAd();
+      
+      function initAds() {
+  if (admob) {
+    var adPublisherIds = {
+        android : {
+        banner : "ca-app-pub-9008926290238612/4489704660",
+        interstitial : "ca-app-pub-9008926290238612/5966437867"
+      }
+    };
+
+    var admobid = (/(android)/i.test(navigator.userAgent)) ? adPublisherIds.android : adPublisherIds.ios;
+
+    admob.setOptions({
+      publisherId:          admobid.banner,
+      interstitialAdId:     admobid.interstitial,
+      bannerAtTop: false,	    
+      autoShowInterstitial: true
+    });
+
+    registerAdEvents();
+
+  } else {
+    alert('AdMobAds plugin not ready');
+  }
+}
     </script>
   </head>
   <body>
